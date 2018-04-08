@@ -122,12 +122,17 @@ class ContactData extends Component {
       isValid = value.trim() !== '' && isValid
     }
 
-    if (rules.maxLength) {
+    if (rules.minLength) {
       isValid = value.length >= rules.minLength && isValid
     }
 
-    if (rules.minLength) {
-      isValid = value.length >= rules.minLength && isValid
+    if (rules.maxLength) {
+      isValid = value.length <= rules.maxLength && isValid
+    }
+
+    if (rules.isEmail) {
+      const pattern = /\S+@\S+\.\S+/
+      isValid = pattern.test(value) && isValid
     }
 
     return isValid
